@@ -15,7 +15,6 @@ import org.json.JSONArray;
  */
 public class JSONTranslator implements Translator {
 
-    // TODO Task: pick appropriate instance variables for this class
 
     /**
      * Constructs a JSONTranslator using data from the sample.json resources file.
@@ -32,10 +31,10 @@ public class JSONTranslator implements Translator {
     public JSONTranslator(String filename) {
         // read the file to get the data to populate things...
         try {
-
-            String jsonString = Files.readString(Paths.get(getClass().getClassLoader().getResource(filename).toURI()));
-
+            String jsonString = Files.readString(Paths.get(getClass()
+                    .getClassLoader().getResource(filename).toURI()));
             JSONArray jsonArray = new JSONArray(jsonString);
+
 
             // TODO Task: use the data in the jsonArray to populate your instance variables
             //            Note: this will likely be one of the most substantial pieces of code you write in this lab.
