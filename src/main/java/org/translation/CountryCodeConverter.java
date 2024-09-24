@@ -45,8 +45,8 @@ public class CountryCodeConverter {
                         res[0] = res[0] + " " + res[j];
                     }
                 }
-                codeToCountry.put(res[res.length - 3].strip(), res[0].strip());
-                countryToCode.put(res[0].strip(), res[res.length - 3].strip());
+                codeToCountry.put(res[res.length - 2].strip().toLowerCase(), res[0].strip());
+                countryToCode.put(res[0].strip(), res[res.length - 2].strip().toLowerCase());
             }
         }
         catch (IOException | URISyntaxException ex) {
