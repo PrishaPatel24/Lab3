@@ -78,10 +78,6 @@ public class JSONTranslator implements Translator {
     @Override
     public String translate(String country, String language) {
         // Task: complete this method using your instance variables as needed
-<<<<<<< HEAD
-=======
-//        return JSONMap.get(country).get(language);
->>>>>>> 4b0badf85dac39becb5a51fff328ed6e0e860f65
         Map<String, String> languageCodes = jsonMap.get(country);
         if (languageCodes != null) {
             return languageCodes.get(language);
