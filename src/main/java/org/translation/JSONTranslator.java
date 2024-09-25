@@ -16,7 +16,7 @@ import org.json.JSONObject;
 public class JSONTranslator implements Translator {
 
     // Task: pick appropriate instance variables for this class
-    Map<String, Map<String, String>> JSONMap = new HashMap<>();
+    Map<String, Map<String, String>> jsonMap = new HashMap<>();
 
     /**
      * Constructs a JSONTranslator using data from the sample.json resources file.
@@ -51,7 +51,7 @@ public class JSONTranslator implements Translator {
                         innerMap.put(key, jsonObject.getString(key));
                     }
                 }
-                JSONMap.put(jsonObject.getString("alpha3"), innerMap);
+                jsonMap.put(jsonObject.getString("alpha3"), innerMap);
             }
         }
         catch (IOException | URISyntaxException ex) {
@@ -63,7 +63,7 @@ public class JSONTranslator implements Translator {
     public List<String> getCountryLanguages(String country) {
         // Task: return an appropriate list of language codes,
         //            but make sure there is no aliasing to a mutable object
-        List<String> lst = new ArrayList<>(JSONMap.get(country).keySet());
+        List<String> lst = new ArrayList<>(jsonMap.get(country).keySet());
         return lst;
     }
 
@@ -71,7 +71,7 @@ public class JSONTranslator implements Translator {
     public List<String> getCountries() {
         // Task: return an appropriate list of country codes,
         //            but make sure there is no aliasing to a mutable object
-        List<String> lst = new ArrayList<>(JSONMap.keySet());
+        List<String> lst = new ArrayList<>(jsonMap.keySet());
         return lst;
     }
 
@@ -79,7 +79,7 @@ public class JSONTranslator implements Translator {
     public String translate(String country, String language) {
         // Task: complete this method using your instance variables as needed
 //        return JSONMap.get(country).get(language);
-        Map<String, String> languageCodes = JSONMap.get(country);
+        Map<String, String> languageCodes = jsonMap.get(country);
         if (languageCodes != null) {
             return languageCodes.get(language);
         }
