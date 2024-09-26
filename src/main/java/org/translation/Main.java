@@ -2,7 +2,6 @@ package org.translation;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -26,7 +25,7 @@ public class Main {
         // Task: once you finish the JSONTranslator,
         //            you can use it here instead of the InLabByHandTranslator
         //            to try out the whole program!
-         Translator translator = new JSONTranslator();
+        Translator translator = new JSONTranslator();
         // Translator translator = new InLabByHandTranslator();
 
         runProgram(translator);
@@ -40,6 +39,9 @@ public class Main {
      */
     public static void runProgram(Translator translator) {
         String exitCommand = "quit";
+        CountryCodeConverter countryConverter = new CountryCodeConverter();
+        LanguageCodeConverter languageConverter = new LanguageCodeConverter();
+
         while (true) {
             String country = promptForCountry(translator);
             // CheckStyle: The String "quit" appears 3 times in the file.
@@ -47,19 +49,23 @@ public class Main {
             if (country.equals(exitCommand)) {
                 break;
             }
-            // TODO Task: Once you switch promptForCountry so that it returns the country
+            // Task: Once you switch promptForCountry so that it returns the country
             //            name rather than the 3-letter country code, you will need to
             //            convert it back to its 3-letter country code when calling promptForLanguage
-            String language = promptForLanguage(translator, country);
+            String countryCode = countryConverter.countryToCode.get(country);
+
+            String language = promptForLanguage(translator, countryCode);
             if (language.equals(exitCommand)) {
                 break;
             }
-            // TODO Task: Once you switch promptForLanguage so that it returns the language
+            // Task: Once you switch promptForLanguage so that it returns the language
             //            name rather than the 2-letter language code, you will need to
             //            convert it back to its 2-letter language code when calling translate.
             //            Note: you should use the actual names in the message printed below though,
             //            since the user will see the displayed message.
-            System.out.println(country + " in " + language + " is " + translator.translate(country, language));
+            String languageCode = languageConverter.languageToCode.get(language);
+
+            System.out.println(country + " in " + language + " is " + translator.translate(countryCode, languageCode));
             System.out.println("Press enter to continue or quit to exit.");
             Scanner s = new Scanner(System.in);
             String textTyped = s.nextLine();
