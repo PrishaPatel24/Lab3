@@ -85,7 +85,7 @@ public class Main {
         // Task: convert the country codes to the actual country names before sorting
         CountryCodeConverter converter = new CountryCodeConverter();
 
-        countries.replaceAll(key -> converter.codeToCountry.get(key));
+        countries.replaceAll(converter::fromCountryCode);
 
         Collections.sort(countries);
         for (String country : countries) {
