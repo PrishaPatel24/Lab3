@@ -12,13 +12,8 @@ import java.util.Map;
  * This class provides the service of converting country codes to their names.
  */
 public class CountryCodeConverter {
-    Map<String, String> codeToCountry = new HashMap<>();
-    Map<String, String> countryToCode = new HashMap<>();
-
-    public static void main(String[] args) {
-        CountryCodeConverter converter = new CountryCodeConverter();
-        System.out.println(converter);
-    }
+    private final Map<String, String> codeToCountry = new HashMap<>();
+    private final Map<String, String> countryToCode = new HashMap<>();
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -34,15 +29,16 @@ public class CountryCodeConverter {
      * @throws RuntimeException if the resource file can't be loaded properly
      */
     public CountryCodeConverter(String filename) {
-
+        final int four = 4;
+        final int three = 3;
         try {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
             for (int i = 1; i < lines.size(); i++) {
                 String line = lines.get(i);
                 String[] res = line.split("\\s+");
-                if (res.length > 4) {
-                    for (int j = 1; j < res.length - 3; j++) {
+                if (res.length > four) {
+                    for (int j = 1; j < res.length - three; j++) {
                         res[0] = res[0] + " " + res[j];
                     }
                 }

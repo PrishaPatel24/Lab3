@@ -52,7 +52,7 @@ public class Main {
             // Task: Once you switch promptForCountry so that it returns the country
             //            name rather than the 3-letter country code, you will need to
             //            convert it back to its 3-letter country code when calling promptForLanguage
-            String countryCode = countryConverter.countryToCode.get(country);
+            String countryCode = countryConverter.fromCountry(country);
 
             String language = promptForLanguage(translator, countryCode);
             if (language.equals(exitCommand)) {
@@ -63,7 +63,7 @@ public class Main {
             //            convert it back to its 2-letter language code when calling translate.
             //            Note: you should use the actual names in the message printed below though,
             //            since the user will see the displayed message.
-            String languageCode = languageConverter.languageToCode.get(language);
+            String languageCode = languageConverter.fromLanguage(language);
 
             System.out.println(country + " in " + language + " is " + translator.translate(countryCode, languageCode));
             System.out.println("Press enter to continue or quit to exit.");
@@ -85,9 +85,7 @@ public class Main {
         // Task: convert the country codes to the actual country names before sorting
         CountryCodeConverter converter = new CountryCodeConverter();
 
-        for (int i = 0; i < countries.size(); i++) {
-            countries.set(i, converter.codeToCountry.get(countries.get(i)));
-        }
+        countries.replaceAll(key -> converter.codeToCountry.get(key));
 
         Collections.sort(countries);
         for (String country : countries) {
@@ -109,9 +107,7 @@ public class Main {
         List<String> languages = translator.getCountryLanguages(country);
         LanguageCodeConverter converter = new LanguageCodeConverter();
 
-        for (int i = 0; i < languages.size(); i++) {
-            languages.set(i, converter.codeToLanguage.get(languages.get(i)));
-        }
+        languages.replaceAll(converter::fromLanguageCode);
 
         Collections.sort(languages);
         for (String language : languages) {

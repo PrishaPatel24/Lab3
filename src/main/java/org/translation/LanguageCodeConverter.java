@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,21 +12,10 @@ import java.util.Map;
  * This class provides the service of converting language codes to their names.
  */
 public class LanguageCodeConverter {
-    Map<String, String> codeToLanguage = new HashMap<>();
-    Map<String, String> languageToCode = new HashMap<>();
+    private final Map<String, String> codeToLanguage = new HashMap<>();
+    private final Map<String, String> languageToCode = new HashMap<>();
 
-    public static void main(String[] args) {
-        LanguageCodeConverter converter = new LanguageCodeConverter();
-    }
     // TODO Task: pick appropriate instance variables to store the data necessary for this class
-
-    /**
-     * Default constructor which will load the language codes from "language-codes.txt"
-     * in the resources folder.
-     */
-    public LanguageCodeConverter() {
-        this("language-codes.txt");
-    }
 
     /**
      * Overloaded constructor which allows us to specify the filename to load the language code data from.
@@ -58,6 +46,14 @@ public class LanguageCodeConverter {
             throw new RuntimeException(ex);
         }
 
+    }
+    /**
+     * Default constructor which will load the language codes from "language-codes.txt"
+     * in the resources folder.
+     */
+
+    public LanguageCodeConverter() {
+        this("language-codes.txt");
     }
 
     /**
